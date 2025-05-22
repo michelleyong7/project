@@ -22,7 +22,7 @@ const projectsData: Project[] = [
     image: "/nick.logo.png",
     icon: <PieChart className="h-5 w-5" />,
     color: "from-primary-500 to-primary-400",
-    githubUrl: "https://github.com/michelleyong/ag-campaign-analysis"
+    githubUrl: "https://github.com/michelleyong7/ag-campaign-analysis"
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ const projectsData: Project[] = [
     image: "/instacart photo.jpg",
     icon: <LineChart className="h-5 w-5" />,
     color: "from-secondary-500 to-secondary-400",
-    githubUrl: "https://github.com/michelleyong/instacart-analysis"
+    githubUrl: "https://github.com/michelleyong7/instacart-analysis"
   },
   {
     id: 3,
@@ -44,7 +44,7 @@ const projectsData: Project[] = [
     image: "https://images.pexels.com/photos/7579831/pexels-photo-7579831.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     icon: <BarChart2 className="h-5 w-5" />,
     color: "from-accent-500 to-accent-400",
-    githubUrl: "https://github.com/michelleyong/saas-analytics"
+    githubUrl: "https://github.com/michelleyong7/saas-analytics"
   },
   {
     id: 4,
