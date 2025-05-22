@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
           </div>
           
           <div className="flex justify-center space-x-6 text-gray-400">
-            {['Home', 'About', 'Projects', 'Experience', 'Contact'].map((item) => (
+            {['Home', 'About', 'Projects', 'Experience'].map((item) => (
               <Link
                 key={item}
                 to={item.toLowerCase()}

@@ -8,7 +8,6 @@ const navLinks = [
   { name: 'About', to: 'about' },
   { name: 'Projects', to: 'projects' },
   { name: 'Experience', to: 'experience' },
-  { name: 'Contact', to: 'contact' },
 ];
 
 const Navbar: React.FC = () => {
