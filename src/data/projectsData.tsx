@@ -29,11 +29,11 @@ const projectsData: Project[] = [
     title: "Instacart Consumer Purchase Pattern Analysis",
     category: "Business Intelligence",
     description: "Explored online grocery shopping behaviors through transaction data. Identified user segmentation and buying trends to inform targeted marketing strategies.",
-    tools: ["Python", "Jupyter Notebook"],
+    tools: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "SQLite", "Jupyter Notebook"],
     image: "/instacart photo.jpg",
     icon: <LineChart className="h-5 w-5" />,
     color: "from-secondary-500 to-secondary-400",
-    githubUrl: "https://github.com/michelleyong7/instacart-analysis"
+    githubUrl: "https://github.com/michelleyong/instacart-analysis"
   },
   {
     id: 3,
