@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-scroll';
-import { BarChart2, TrendingUp, Database, ChevronDown, Linkedin, Mail } from 'lucide-react';
+import { Linkedin, Mail, ChevronDown } from 'lucide-react';
 import BackgroundAnimation from './BackgroundAnimation';
 
 const Hero: React.FC = () => {
@@ -28,46 +28,6 @@ const Hero: React.FC = () => {
               and visuals bring everything to life. What started as a deep dive into political data became 
               a passion for uncovering real-world insights happening every second, across industries and platforms.
             </p>
-            
-            {/* <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start mb-8">
-              <a
-                href="mailto:michelleyong7@gmail.com"
-                className="button-primary"
-              >
-                <Mail className="w-5 h-5 mr-2" />
-                Let's Connect
-              </a>
-              <a
-                href="https://linkedin.com/in/michelle-yong"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="button-secondary"
-              >
-                <Linkedin className="w-5 h-5 mr-2" />
-                LinkedIn
-              </a>
-            </div> */}
-
-            <div className="grid grid-cols-3 gap-4">
-              <DataMetricCard 
-                icon={<BarChart2 className="h-6 w-6 text-primary-400" />} 
-                metric="20%" 
-                label="Efficiency Improvement" 
-                color="from-primary-500/20 to-primary-400/5"
-              />
-              <DataMetricCard 
-                icon={<TrendingUp className="h-6 w-6 text-secondary-400" />} 
-                metric="$500K+" 
-                label="Budget Managed" 
-                color="from-secondary-500/20 to-secondary-400/5"
-              />
-              <DataMetricCard 
-                icon={<Database className="h-6 w-6 text-accent-400" />} 
-                metric="$1M+" 
-                label="Spending Optimized" 
-                color="from-accent-500/20 to-accent-400/5"
-              />
-            </div>
           </motion.div>
           
           <motion.div
@@ -110,25 +70,6 @@ const Hero: React.FC = () => {
         </motion.div>
       </div>
     </section>
-  );
-};
-
-interface DataMetricCardProps {
-  icon: React.ReactNode;
-  metric: string;
-  label: string;
-  color: string;
-}
-
-const DataMetricCard: React.FC<DataMetricCardProps> = ({ icon, metric, label, color }) => {
-  return (
-    <div className={`bg-gradient-to-br ${color} p-4 rounded-xl`}>
-      <div className="flex items-center mb-2">
-        {icon}
-        <div className="ml-2 text-xl font-bold text-white">{metric}</div>
-      </div>
-      <div className="text-sm text-gray-300">{label}</div>
-    </div>
   );
 };
 

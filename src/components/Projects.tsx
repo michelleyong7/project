@@ -1,70 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, BarChart2, PieChart, LineChart, AreaChart } from 'lucide-react';
-
-// Sample project data
-const projectsData = [
-  {
-    id: 1,
-    title: "Customer Segmentation & Retention Analysis",
-    category: "Marketing Analytics",
-    description: "Used clustering algorithms to segment 50,000+ customers and developed targeted retention strategies, resulting in a 24% decrease in churn rate and 18% increase in customer lifetime value.",
-    tools: ["Python", "Scikit-learn", "Tableau", "SQL"],
-    image: "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    icon: <PieChart className="h-5 w-5" />,
-    color: "from-primary-500 to-primary-400",
-  },
-  {
-    id: 2,
-    title: "Sales Forecasting & Inventory Optimization",
-    category: "Business Intelligence",
-    description: "Built predictive models for sales forecasting across 200+ product categories, optimizing inventory levels and reducing stockouts by 35% while decreasing excess inventory costs by 28%.",
-    tools: ["R", "Time Series Analysis", "Power BI", "Excel"],
-    image: "https://images.pexels.com/photos/5668859/pexels-photo-5668859.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    icon: <LineChart className="h-5 w-5" />,
-    color: "from-secondary-500 to-secondary-400",
-  },
-  {
-    id: 3,
-    title: "Healthcare Operational Efficiency Dashboard",
-    category: "Healthcare Analytics",
-    description: "Designed interactive dashboard tracking 15+ KPIs across 5 departments, identifying bottlenecks and improving patient throughput by 32% while reducing operational costs by $2.1M annually.",
-    tools: ["Tableau", "SQL", "Excel", "Alteryx"],
-    image: "https://images.pexels.com/photos/7579831/pexels-photo-7579831.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    icon: <BarChart2 className="h-5 w-5" />,
-    color: "from-accent-500 to-accent-400",
-  },
-  {
-    id: 4,
-    title: "Digital Marketing Campaign Analysis",
-    category: "Marketing Analytics",
-    description: "Analyzed performance across multiple digital channels, optimizing ad spend allocation that increased ROAS by 42% and identified high-value customer segments for targeted engagement.",
-    tools: ["Google Analytics", "Python", "Power BI", "SQL"],
-    image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    icon: <AreaChart className="h-5 w-5" />,
-    color: "from-primary-500 to-primary-400",
-  },
-  {
-    id: 5,
-    title: "Supply Chain Network Optimization",
-    category: "Operations Research",
-    description: "Created simulation models to optimize distribution network, resulting in 18% reduction in transportation costs and 23% improvement in on-time delivery performance.",
-    tools: ["Python", "OR-Tools", "Tableau", "SQL"],
-    image: "https://images.pexels.com/photos/4481326/pexels-photo-4481326.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    icon: <BarChart2 className="h-5 w-5" />,
-    color: "from-secondary-500 to-secondary-400",
-  },
-  {
-    id: 6,
-    title: "Financial Fraud Detection System",
-    category: "Financial Analytics",
-    description: "Developed machine learning models to detect fraudulent transactions with 94% accuracy, reducing false positives by 65% and preventing an estimated $3.2M in annual fraud losses.",
-    tools: ["Python", "TensorFlow", "SQL", "Kibana"],
-    image: "https://images.pexels.com/photos/6693661/pexels-photo-6693661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    icon: <LineChart className="h-5 w-5" />,
-    color: "from-accent-500 to-accent-400",
-  },
-];
+import { ExternalLink, BarChart2, PieChart, LineChart, AreaChart, PlayCircle } from 'lucide-react';
+import projectsData, { Project } from '../data/projectsData.tsx';
+import VideoModal from './VideoModal';
 
 // Filter categories extracted from projects
 const categories = ['All', ...Array.from(new Set(projectsData.map(project => project.category)))];
@@ -72,10 +10,22 @@ const categories = ['All', ...Array.from(new Set(projectsData.map(project => pro
 const Projects: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const [showVideoModal, setShowVideoModal] = useState(false);
+  const [videoModalSrc, setVideoModalSrc] = useState('');
 
   const filteredProjects = activeCategory === 'All' 
     ? projectsData 
     : projectsData.filter(project => project.category === activeCategory);
+
+  const openVideoModal = (videoSrc: string) => {
+    setVideoModalSrc(videoSrc);
+    setShowVideoModal(true);
+  };
+
+  const closeVideoModal = () => {
+    setShowVideoModal(false);
+    setVideoModalSrc('');
+  };
 
   return (
     <section id="projects" className="section-padding bg-white">
@@ -88,10 +38,6 @@ const Projects: React.FC = () => {
           className="text-center mb-12"
         >
           <h2 className="section-heading">Featured <span className="text-primary-500">Projects</span></h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
-            Explore a selection of my data analysis projects that demonstrate my expertise in
-            transforming complex data into actionable business insights.
-          </p>
           
           <div className="flex flex-wrap justify-center gap-3 mb-10">
             {categories.map(category => (
@@ -110,7 +56,7 @@ const Projects: React.FC = () => {
           </div>
         </motion.div>
         
-        <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -165,6 +111,14 @@ const Projects: React.FC = () => {
           <ProjectModal
             project={projectsData.find(p => p.id === selectedProject)!}
             onClose={() => setSelectedProject(null)}
+            onOpenVideoModal={openVideoModal}
+          />
+        )}
+
+        {showVideoModal && (
+          <VideoModal 
+            videoSrc={videoModalSrc}
+            onClose={closeVideoModal}
           />
         )}
       </div>
@@ -173,11 +127,12 @@ const Projects: React.FC = () => {
 };
 
 interface ProjectModalProps {
-  project: typeof projectsData[0];
+  project: Project;
   onClose: () => void;
+  onOpenVideoModal: (videoSrc: string) => void;
 }
 
-const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, onOpenVideoModal }) => {
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
       <div 
@@ -217,33 +172,89 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
           
           <div className="mb-6">
             <h4 className="text-lg font-semibold mb-2">Methodology</h4>
-            <p className="text-gray-700">
-              I approached this project by first understanding the core business challenges, then collecting and 
-              cleaning the relevant data. After exploratory analysis, I identified key patterns and relationships
-              that informed the development of our analytical models. The final deliverables included interactive 
-              dashboards and comprehensive documentation.
-            </p>
+            {project.id === 1 ? (
+              <p className="text-gray-700">
+                I collected and cleaned the publicly available campaign donation data using SQL. Grouped donors by demographic features and sizes. Using tableau was perfect to visualize trends such as donation frequencies, high-value donors, and surges that aligned with campaign events for the Attorney General.
+              </p>
+            ) : project.id === 2 ? (
+              <p className="text-gray-700">
+                In this project, I analyzed transactional grocery order data using Python and Pandas. Grouped the data by user, product and time intervals while also calculating reorder rates, peak order days, and most frequently bought items. My visualization trends in this project were mostly done using Seaborn and Matplotlib.
+              </p>
+            ) : project.id === 3 ? (
+              <p className="text-gray-700">
+                I designed a SQLite database schema with four key tables (Plans, Marketing Campaigns, Customers, and Subscriptions) to model the SaaS business data structure. Using Python, I created scripts to generate realistic sample data spanning two years, including different subscription plans, marketing campaigns, and customer lifecycle events. I then developed a Streamlit dashboard application that calculates key metrics including MRR trends, MRR movements (new, expansion, contraction, churned), and connects marketing campaign performance to customer acquisition metrics.
+              </p>
+            ) : project.id === 4 ? (
+              <p className="text-gray-700">
+                I implemented a comprehensive rule-based fraud detection system using Python and SQL for a dataset of over 30,000 transactions. I created 7 different fraud detection rules based on behavioral patterns like transaction frequency, unusual timing (2-4AM transactions), refund behavior, device sharing across users, and transaction amount spikes. Each rule identified specific suspicious patterns and contributed to a composite risk score that ultimately flagged high-priority users for investigation.
+              </p>
+            ) : (
+              <p className="text-gray-700">
+                I approached this project by first understanding the core business challenges, then collecting and 
+                cleaning the relevant data. After exploratory analysis, I identified key patterns and relationships
+                that informed the development of our analytical models. The final deliverables included interactive 
+                dashboards and comprehensive documentation.
+              </p>
+            )}
           </div>
           
           <div className="mb-6">
             <h4 className="text-lg font-semibold mb-2">Results & Impact</h4>
-            <ul className="list-disc pl-5 text-gray-700 space-y-1">
-              <li>Improved decision-making efficiency by 45% through automated reporting</li>
-              <li>Identified overlooked opportunities worth an estimated $1.2M in annual revenue</li>
-              <li>Reduced manual analysis time by 25 hours per week across the analytics team</li>
-              <li>Established standardized KPI tracking for ongoing performance monitoring</li>
-            </ul>
+            {project.id === 1 ? (
+              <p className="text-gray-700">
+                Results of the campaign were that AG Nick Brown was able to deliever a victory. The project enabled identification of key donation districts and cities along with their behaviors. It also helped draw correlations between campaign milestones and increased donor activity, useful for future campaign planning for other politicians and fundraising strategy.
+              </p>
+            ) : project.id === 2 ? (
+              <p className="text-gray-700">
+                Results of this project were being able to undercover consumer shopping patterns such as weekend purchase spikes and high frequency product categories. The insights that were discovered could support targeted marketing and inventory planning for online grocery platforms.
+              </p>
+            ) : project.id === 3 ? (
+              <ul className="list-disc pl-5 text-gray-700 space-y-1">
+                <li>Created a comprehensive analytics dashboard with three main sections: Key Metrics Overview, Subscription Fluctuations, and Marketing Impact Analysis</li>
+                <li>Implemented interactive visualization of MRR trends and MRR movements over time (new, expansion, contraction, churned)</li>
+                <li>Developed tracking for subscription lifecycle events including new subscriptions, cancellations, upgrades, and downgrades</li>
+                <li>Built marketing campaign performance metrics to measure customer acquisition, initial MRR, and customer acquisition cost (CAC)</li>
+                <li>Included global date range filtering capabilities to analyze metrics across different time periods</li>
+              </ul>
+            ) : project.id === 4 ? (
+              <ul className="list-disc pl-5 text-gray-700 space-y-1">
+                <li>Successfully identified high-frequency transaction users ({'>'}5 transactions in 1 hour)</li>
+                <li>Detected unusual transaction patterns during 2-4AM potentially indicating bot activity</li>
+                <li>Flagged users with suspicious refund behavior ({'>'}3 refunds in a calendar month)</li>
+                <li>Identified shared devices being used by 5+ different users</li>
+                <li>Detected transaction amount spikes (3x above user&apos;s average)</li>
+                <li>Created clear visualizations showing transaction distribution patterns and risk scores</li>
+                <li>Developed a composite risk scoring system to prioritize highest-risk users</li>
+              </ul>
+            ) : (
+              <ul className="list-disc pl-5 text-gray-700 space-y-1">
+                <li>Improved decision-making efficiency by 45% through automated reporting</li>
+                <li>Identified overlooked opportunities worth an estimated $1.2M in annual revenue</li>
+                <li>Reduced manual analysis time by 25 hours per week across the analytics team</li>
+                <li>Established standardized KPI tracking for ongoing performance monitoring</li>
+              </ul>
+            )}
           </div>
           
           <div className="mb-6">
             <h4 className="text-lg font-semibold mb-2">Tools & Technologies</h4>
-            <div className="flex flex-wrap gap-2">
-              {project.tools.map(tool => (
-                <span key={tool} className="px-3 py-1.5 bg-gray-100 text-gray-800 text-sm font-medium rounded-lg">
-                  {tool}
-                </span>
-              ))}
-            </div>
+            {project.id === 3 || project.id === 4 ? (
+              <div className="flex flex-wrap gap-2">
+                {project.tools.map(tool => (
+                  <span key={tool} className="px-3 py-1.5 bg-gray-100 text-gray-800 text-sm font-medium rounded-lg">
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-wrap gap-2">
+                {project.tools.map(tool => (
+                  <span key={tool} className="px-3 py-1.5 bg-gray-100 text-gray-800 text-sm font-medium rounded-lg">
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
           
           <div className="flex justify-end pt-4 border-t border-gray-100">
@@ -253,17 +264,43 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             >
               Close
             </button>
-            <a 
-              href="#"
-              className="button-primary"
-              onClick={(e) => {
-                e.preventDefault();
-                alert("Project details download functionality would be implemented here");
-              }}
-            >
-              <ExternalLink className="h-5 w-5 mr-2" />
-              View Full Case Study
-            </a>
+
+            {/* Tableau Link for Project 1 */}
+            {project.id === 1 && (
+              <a 
+                href="https://public.tableau.com/app/profile/michelle.yong2814/viz/NBAGPublicContributions/AGcampaigndashboard" 
+                className="button-primary mr-3"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLink className="h-5 w-5 mr-2" />
+                Tableau
+              </a>
+            )}
+
+            {/* Dashboard Video Button for Project 3 */}
+            {project.id === 3 && (
+              <button 
+                onClick={() => onOpenVideoModal('/streamlitappvideo.webm')}
+                className="button-primary mr-3"
+              >
+                <PlayCircle className="h-5 w-5 mr-2" />
+                Dashboard Video
+              </button>
+            )}
+
+            {/* View Full Case Study Link (for projects with a githubUrl) */}
+            {project.githubUrl && (
+              <a 
+                href={project.githubUrl}
+                className="button-primary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLink className="h-5 w-5 mr-2" />
+                View Full Case Study
+              </a>
+            )}
           </div>
         </div>
       </div>

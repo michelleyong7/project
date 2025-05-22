@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
               <h3 className="text-2xl font-semibold">Let's Connect</h3>
               <div className="flex space-x-4 mt-2">
                 <a 
-                  href="https://linkedin.com/in/michelle-yong" 
+                  href="https://linkedin.com/in/michelley7" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-primary-400 transition-colors"
@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
                   <Linkedin className="h-6 w-6" />
                 </a>
                 <a 
-                  href="https://github.com/michelleyong" 
+                  href="https://github.com/michelleyong7" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-primary-400 transition-colors"

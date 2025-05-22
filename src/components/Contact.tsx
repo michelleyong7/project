@@ -48,10 +48,6 @@ const Contact: React.FC = () => {
           className="text-center mb-12"
         >
           <h2 className="section-heading">Let's <span className="text-primary-500">Connect</span></h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Interested in discussing how data analysis can benefit your organization? 
-            I'd love to hear from you and explore how we can work together!
-          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
