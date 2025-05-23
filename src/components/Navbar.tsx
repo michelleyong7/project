@@ -121,7 +121,7 @@ const Navbar: React.FC = () => {
       <ResumeModal 
         isOpen={isResumeModalOpen} 
         onClose={() => setIsResumeModalOpen(false)} 
-        resumePath="/Michelle_Yong_Resume.pdf"
+        resumePath="/MYONGRES.pdf"
       />
     </nav>
   );

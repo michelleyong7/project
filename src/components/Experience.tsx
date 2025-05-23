@@ -104,9 +104,9 @@ const Experience: React.FC = () => {
           className="text-center mt-16"
         >
           <a 
-            href="/Michelle_Yong_Resume.pdf"
+            href="/MYONGRES.pdf"
             className="button-primary"
-            download="Michelle_Yong_Resume.pdf"
+            download="MYONGRES.pdf"
           >
             Download Full Resume
           </a>
