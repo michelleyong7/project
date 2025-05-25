@@ -24,9 +24,9 @@ const Hero: React.FC = () => {
             </div>
             
             <p className="text-gray-300 text-lg mb-8 md:pr-8">
-              I've always been drawn to the stories data can tell — how patterns emerge, behaviors shift, 
-              and visuals bring everything to life. What started as a deep dive into political data became 
-              a passion for uncovering real-world insights happening every second, across industries and platforms.
+              I've always been fascinated by the vast amount of information we generate in our daily lives — every interaction, transaction, and click contributing to a larger narrative. Recognizing how organizations harness this data to anticipate trends and drive strategic growth sparked my passion for data analysis. For me, data isn't just about numbers; it's about uncovering the real-world stories and actionable insights that lie beneath the surface.
+
+              In my work, I strive to bridge the gap between complex datasets and clear, impactful storytelling. I approach data visualization not just as a means to display results, but as a way to make insights accessible and engaging for any audience. By combining analytical rigor with thoughtful design, I aim to create visual narratives that not only inform, but inspire action and drive meaningful decisions.
             </p>
           </motion.div>
           
